@@ -1,0 +1,16 @@
+- hosts: balancer
+  become: yes
+  tasks: 
+  - name: farantindo HPROXY
+    package:
+      name: haproxy
+      state: present
+  -name: Garantindo configuração
+   copy:
+     src: haproxy.cfg
+     dest:/etc/haproxy/haproxy.cfg
+  - name: garantindo recarregamento do HAPROXY
+    service:
+      name: haproxy
+      state: restarted
+      enable: yes
